@@ -28,17 +28,21 @@ class Player:
         self.deflector_angle += 0.001
 
     def render(self, screen):
+        # Draw the main player
         pygame.draw.circle(screen, (0,0,0), self.pos.to_int().to_tuple(), self.radius)
 
 
+        # Find the middle of the deflector
         deflector_mid_point = self.pos + Vec2(self.deflector_distance_from_player*math.cos(self.deflector_angle),
                                               -self.deflector_distance_from_player*math.sin(self.deflector_angle))
 
+        # Find the start and end of the deflector
         deflector_start = deflector_mid_point + Vec2(-(self.deflector_width/2)*math.cos(math.pi/2 - self.deflector_angle),
                                                      -(self.deflector_width/2)*math.sin(math.pi/2 - self.deflector_angle))
         deflector_end = deflector_mid_point + Vec2((self.deflector_width/2)*math.cos(math.pi/2 - self.deflector_angle),
                                                    (self.deflector_width/2)*math.sin(math.pi/2 - self.deflector_angle))
 
+        # Draw the deflector
         pygame.draw.line(screen, (0,0,0), deflector_start.to_int().to_tuple(), deflector_end.to_int().to_tuple())
 
 
