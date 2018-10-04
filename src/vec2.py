@@ -35,3 +35,7 @@ class Vec2:
     # Get magnitude
     def magnitude(self):
         return math.sqrt(self.x**2 + self.y**2)
+
+    # Turns the vec into a tuple, useful for pygame
+    def to_tuple(self):
+        return (self.x, self.y)
