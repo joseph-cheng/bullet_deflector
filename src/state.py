@@ -1,4 +1,5 @@
 import renderer
+import player
 
 class State:
     def __init__(self, width, height):
@@ -7,6 +8,8 @@ class State:
 
         self.renderer = renderer.Renderer(self.width, self.height)
 
+        self.player = player.Player(width/2, height/2)
+
     #TODO: implement updating
     def update(self):
-        pass
+        self.player.update()

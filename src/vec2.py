@@ -39,3 +39,6 @@ class Vec2:
     # Turns the vec into a tuple, useful for pygame
     def to_tuple(self):
         return (self.x, self.y)
+
+    def to_int(self):
+        return Vec2(int(self.x), int(self.y))

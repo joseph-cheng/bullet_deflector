@@ -7,8 +7,10 @@ class Renderer:
 
         self.screen = pygame.display.set_mode((self.width, self.height))
 
-    def render(self):
+    def render(self, state_obj):
         self.screen.fill((255,255,255))
+
+        state_obj.player.render(self.screen)
 
         pygame.display.update()
 
