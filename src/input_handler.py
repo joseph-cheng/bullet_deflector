@@ -35,6 +35,16 @@ class InputHandler:
                     self.input_state.move_right = 1
                 if event.key == self.input_state.key_code_left:
                     self.input_state.move_left = 1
+
+            if event.type == pygame.KEYUP:
+                if event.key == self.input_state.key_code_up:
+                    self.input_state.move_up = 0
+                if event.key == self.input_state.key_code_down:
+                    self.input_state.move_down = 0
+                if event.key == self.input_state.key_code_right:
+                    self.input_state.move_right = 0
+                if event.key == self.input_state.key_code_left:
+                    self.input_state.move_left = 0
             if event.type == pygame.MOUSEMOTION:
                 self.input_state.mouse_pos = pygame.mouse.get_pos()
 
