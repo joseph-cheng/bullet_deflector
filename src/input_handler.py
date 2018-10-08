@@ -1,5 +1,6 @@
 import pygame
 
+#Stores an input state, e.g. what keys or buttons are being pressed
 class InputState:
 
     def __init__(self):
@@ -11,12 +12,15 @@ class InputState:
         self.move_down = 0.0
         self.move_left = 0.0
         self.move_right = 0.0
+        self.mouse_pos = (0,0)
 
+#Handles all the input events
 class InputHandler:
 
     def __init__(self):
         self.input_state = InputState()
 
+    # Changes input state based on input events
     def input_callback(self):
         for event in pygame.event.get():
 
@@ -32,7 +36,7 @@ class InputHandler:
                 if event.key == self.input_state.key_code_left:
                     self.input_state.move_left = 1
             if event.type == pygame.MOUSEMOTION:
-                pygame.mouse.get_pos()
+                self.input_state.mouse_pos = pygame.mouse.get_pos()
 
     def get_current_input_state(self):
         self.input_callback()
