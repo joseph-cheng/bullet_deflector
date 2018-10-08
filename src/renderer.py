@@ -12,5 +12,9 @@ class Renderer:
 
         state_obj.player.render(self.screen)
 
+##      Runs the render function for each enemy currently alive
+        for enemy in state_obj.enemies:
+            enemy.render(self.screen)
+
         pygame.display.update()
 

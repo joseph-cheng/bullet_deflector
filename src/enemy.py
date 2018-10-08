@@ -1,4 +1,5 @@
 from vec2 import Vec2
+import pygame
 
 class Enemy:
     def __init__(self, x, y, c):
