@@ -50,3 +50,7 @@ class Vec2:
     #Get a Vec2 from a tuple
     def from_tuple(tup):
         return Vec2(tup[0], tup[1])
+
+    # Returns a copy of itself
+    def copy(self):
+        return Vec2(self.x, self.y)

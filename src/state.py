@@ -14,9 +14,14 @@ class State:
 
 ##      Stores all of the enemies, currently creates them
         self.enemies = [enemy.Enemy(10, 100, (255,0,0)),enemy.Enemy(400, 500, (0,255,0)),enemy.Enemy(800, 400, (0,0,255))]
+        self.bullets = []
 
-    #TODO: implement updating
     def update(self):
         current_input_state = self.input_handler.get_current_input_state()
 
         self.player.update(current_input_state)
+
+        for enemy in self.enemies:
+            enemy.update(self)
+        for bullet in self.bullets:
+            bullet.update(self)
