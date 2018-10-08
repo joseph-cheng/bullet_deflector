@@ -13,7 +13,7 @@ class State:
         self.player = player.Player(width/2, height/2)
 
 ##      Stores all of the enemies, currently creates them
-        self.enemies = [enemy.Enemy(10, 100, (255,0,0)),enemy.Enemy(400, 500, (0,255,0)),enemy.Enemy(800, 400, (0,0,255))]
+        self.enemies = [enemy.Enemy(10, 100, (255,0,0))]
         self.bullets = []
 
     def update(self):
