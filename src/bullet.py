@@ -8,6 +8,10 @@ class Bullet:
         self.pos = pos
         self.vel = vel
         self.radius = 5
+        
+        self.colour = (0,0,0)
+        self.reflected_colour = (255,0,0)
+
 
         #Bool of whether or not the boolean has been reflected off of the player's deflector
         self.reflected = False
@@ -62,5 +66,5 @@ class Bullet:
 
 
     def render(self, screen):
-        pygame.draw.circle(screen, (0,0,0), self.pos.to_int().to_tuple(), self.radius)
+        pygame.draw.circle(screen, self.reflected_colour if self.reflected else self.colour, self.pos.to_int().to_tuple(), self.radius)
 
