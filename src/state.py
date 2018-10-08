@@ -16,4 +16,4 @@ class State:
     def update(self):
         current_input_state = self.input_handler.get_current_input_state()
 
-        self.player.update()
+        self.player.update(current_input_state)

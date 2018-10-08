@@ -8,6 +8,8 @@ class Player:
         self.pos = Vec2(x, y)
         self.vel = Vec2(0, 0)
 
+        self.move_speed = 10
+
 
         # Angle the deflector is facing
         self.deflector_angle = 0
@@ -23,9 +25,13 @@ class Player:
 
 
     # Update the player
-    def update(self):
-        self.pos += self.vel
-        self.deflector_angle += 0.001
+    def update(self, input_state):
+        self.vel += Vec2(input_state.move_right * self.move_speed - input_state.move_left * self.move_speed,
+                        input_state.move_down * self.move_speed - input_state.move_up * self.move_speed)
+
+        self.deflector_angle = (Vec2.from_tuple(input_state.mouse_pos) - self.pos).angle()
+        
+
 
     def render(self, screen):
         # Draw the main player

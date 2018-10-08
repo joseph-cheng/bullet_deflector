@@ -36,9 +36,17 @@ class Vec2:
     def magnitude(self):
         return math.sqrt(self.x**2 + self.y**2)
 
+    #Get angle of vector in radians
+    def angle(self):
+        return math.atan2(self.y, self.x)
+
     # Turns the vec into a tuple, useful for pygame
     def to_tuple(self):
         return (self.x, self.y)
 
     def to_int(self):
         return Vec2(int(self.x), int(self.y))
+
+    #Get a Vec2 from a tuple
+    def from_tuple(tup):
+        return Vec2(tup[0], tup[1])
