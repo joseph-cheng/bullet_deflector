@@ -14,7 +14,8 @@ class State:
 
 ##      Stores all of the enemies, currently creates them
         self.enemies = [enemy.Enemy(10, 100, (255,0,0))]
-        self.bullets = []
+        self.reflected_bullets = []
+        self.unreflected_bullets = []
 
     def update(self):
         current_input_state = self.input_handler.get_current_input_state()
@@ -23,5 +24,12 @@ class State:
 
         for enemy in self.enemies:
             enemy.update(self)
-        for bullet in self.bullets:
+            
+        for bullet in self.reflected_bullets:
+            bullet.collide_with_enemy(self.enemies)          
+            bullet.update(self)
+
+        for bullet in self.unreflected_bullets:
+            bullet.collide_with_player(self.player)
+            bullet.collide_with_deflector(self)
             bullet.update(self)

@@ -16,7 +16,10 @@ class Renderer:
         for enemy in state_obj.enemies:
             enemy.render(self.screen)
         
-        for bullet in state_obj.bullets:
+        for bullet in state_obj.reflected_bullets:
+            bullet.render(self.screen)
+
+        for bullet in state_obj.unreflected_bullets:
             bullet.render(self.screen)
 
         pygame.display.update()

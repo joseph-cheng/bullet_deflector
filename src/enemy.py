@@ -34,7 +34,7 @@ class Enemy:
 
     def shoot_at_player(self, state_obj):
         angle = (state_obj.player.pos - self.pos).angle()
-        state_obj.bullets.append(bullet.Bullet(self.pos.copy(), Vec2(math.cos(angle), math.sin(angle))))
+        state_obj.unreflected_bullets.append(bullet.Bullet(self.pos.copy(), Vec2(math.cos(angle), math.sin(angle))))
 
 
     def render(self, screen):        
