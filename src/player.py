@@ -22,18 +22,26 @@ class Player:
 
         # collisions are done using circles, so we store the radius of the player
         self.radius = 10
+        
+        self.alive = True
 
 
     # Update the player
     def update(self, input_state):
-        #Get the current velocity based on input
-        self.vel = Vec2(input_state.move_right * self.move_speed - input_state.move_left * self.move_speed,
-                        input_state.move_down * self.move_speed - input_state.move_up * self.move_speed)
-        #Change the position
-        self.pos += self.vel
+        if self.alive:
+            #Get the current velocity based on input
+            self.vel = Vec2(input_state.move_right * self.move_speed - input_state.move_left * self.move_speed,
+                            input_state.move_down * self.move_speed - input_state.move_up * self.move_speed)
+            #Change the position
+            self.pos += self.vel
 
-        #Calculate the angle the deflector is facing by finding the vector between the mouse and the player and getting the angle of it
-        self.deflector_angle = -(Vec2.from_tuple(input_state.mouse_pos) - self.pos).angle()
+            #Calculate the angle the deflector is facing by finding the vector between the mouse and the player and getting the angle of it
+            self.deflector_angle = -(Vec2.from_tuple(input_state.mouse_pos) - self.pos).angle()
+
+        else:
+            print("Dead")
+        
+            
 
 
     def render(self, screen):

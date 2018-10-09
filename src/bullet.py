@@ -15,13 +15,22 @@ class Bullet:
 
         #Bool of whether or not the boolean has been reflected off of the player's deflector
         self.reflected = False
+        self.alive = True
 
     def update(self, state_obj):
         self.pos += self.vel
+        self.collide_with_enemy(state_obj.enemies)
+        self.collide_with_player(state_obj.player)
         self.collide_with_deflector(state_obj.player)
-        if self.pos.x + self.radius < 0 or self.pos.x - self.radius > state_obj.width or self.pos.y + self.radius < 0 or self.pos.y - self.radius > state_obj.height:
+        if self.pos.x + self.radius < 0 or self.pos.x - self.radius > state_obj.width or self.pos.y + self.radius < 0 or self.pos.y - self.radius > state_obj.height:    
+            self.alive = False
+            
+        #if the bullet isn't alive delete it   
+        if not self.alive:
             state_obj.bullets.remove(self)
             del self
+
+        
         
 
     #Handle collisions with the deflector
@@ -63,6 +72,19 @@ class Bullet:
 
             self.vel = y - x
             self.reflected = True
+
+    def collide_with_enemy(self, enemies):
+        for enemy in enemies:
+            #If the bullet has been deflected and is colliding with an enemy set the bullet and enemy to not alive
+            if self.reflected and (enemy.pos-self.pos).magnitude2() <= (enemy.radius + self.radius)**2:
+                self.alive = False
+                enemy.alive = False
+
+    def collide_with_player(self, player):
+        #If the bullet has been deflected and is colliding with the player set the bullet and player to not alive
+        if not self.reflected and (player.pos-self.pos).magnitude2() <= (player.radius + self.radius)**2:
+            self.alive = False
+            player.alive = False
 
 
     def render(self, screen):

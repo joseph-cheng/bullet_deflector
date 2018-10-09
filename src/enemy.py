@@ -15,6 +15,8 @@ class Enemy:
         self.max_shoot_timer = 100
         self.shoot_timer = self.max_shoot_timer
 
+        self.alive = True
+
     def update(self, state_obj):
         self.shoot_timer -= 1
 
@@ -25,6 +27,10 @@ class Enemy:
         if self.shoot_timer == 0:
             self.shoot_at_player(state_obj)
             self.shoot_timer = self.max_shoot_timer
+
+        if not self.alive:
+            state_obj.enemies.remove(self)
+            del self
 
     def shoot_at_player(self, state_obj):
         angle = (state_obj.player.pos - self.pos).angle()
