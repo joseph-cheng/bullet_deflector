@@ -45,14 +45,17 @@ class Player:
         deflector_mid_point = self.pos + Vec2(self.deflector_distance_from_player*math.cos(self.deflector_angle),
                                               -self.deflector_distance_from_player*math.sin(self.deflector_angle))
 
+        #Find the vector that takes you from the middle to the end of the deflector (to get to the start, just do the negative of this vector
+        vec_to_end = Vec2((self.deflector_width/2)*math.sin(self.deflector_angle),
+                          (self.deflector_width/2)*math.cos(self.deflector_angle))
+
         # Find the start and end of the deflector
-        deflector_start = deflector_mid_point + Vec2(-(self.deflector_width/2)*math.cos(math.pi/2 - self.deflector_angle),
-                                                     -(self.deflector_width/2)*math.sin(math.pi/2 - self.deflector_angle))
-        deflector_end = deflector_mid_point + Vec2((self.deflector_width/2)*math.cos(math.pi/2 - self.deflector_angle),
-                                                   (self.deflector_width/2)*math.sin(math.pi/2 - self.deflector_angle))
+        # These are stored as member variables because they are useful in the detection of collisions between the deflector and bullets
+        self.deflector_start = deflector_mid_point - vec_to_end 
+        self.deflector_end = deflector_mid_point + vec_to_end
 
         # Draw the deflector
-        pygame.draw.line(screen, (0,0,0), deflector_start.to_int().to_tuple(), deflector_end.to_int().to_tuple())
+        pygame.draw.line(screen, (0,0,0), self.deflector_start.to_int().to_tuple(), self.deflector_end.to_int().to_tuple())
 
 
 
