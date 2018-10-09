@@ -9,6 +9,7 @@ class State:
         self.height = height
         self.input_handler = input_handler.InputHandler()
         self.renderer = renderer.Renderer(self.width, self.height)
+        self.fps = 60
 
         self.player = player.Player(width/2, height/2)
 
@@ -17,10 +18,22 @@ class State:
         self.reflected_bullets = []
         self.unreflected_bullets = []
 
+        self.regular_updates_per_render = 10
+        self.updates_per_render =  self.regular_updates_per_render
+        self.updates_since_render = 0
+        self.slomo_updates_per_render = 1
+
     def update(self):
         current_input_state = self.input_handler.get_current_input_state()
 
         self.player.update(current_input_state)
+
+        #Increase or decrease the updates per render
+        if current_input_state.slomo and self.updates_per_render > self.slomo_updates_per_render:
+            self.updates_per_render -= 0.5
+
+        if not(current_input_state.slomo) and self.updates_per_render < self.regular_updates_per_render:
+            self.updates_per_render += 0.5
 
         for enemy in self.enemies:
             enemy.update(self)
@@ -33,3 +46,5 @@ class State:
             bullet.collide_with_player(self.player)
             bullet.collide_with_deflector(self)
             bullet.update(self)
+        
+        self.updates_since_render += 1

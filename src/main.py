@@ -15,11 +15,11 @@ state_obj = state.State(800,600)
 # main loop
 while True:
 
-    state_obj.update()
-    if state_obj.updates_since_render >= state_obj.updates_per_render:
+    for x in range(int(state_obj.updates_per_render)):
+        state_obj.update()
 
-        state_obj.renderer.render(state_obj)
+    state_obj.renderer.render(state_obj)
 
-        #Cap the framerate
-        clock.tick(state_obj.fps)
+    #Cap the framerate
+    clock.tick(state_obj.fps)
 
