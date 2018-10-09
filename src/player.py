@@ -1,14 +1,18 @@
 from vec2 import Vec2
 import pygame
 import math
+import constants
 
 class Player:
     def __init__(self, x, y):
 
         self.pos = Vec2(x, y)
         self.vel = Vec2(0, 0)
-
-        self.move_speed = 1
+        self.accel = Vec2(0,0)
+        self.mass = 0.02
+        self.force_applied = 10
+        self.friction = 0.25
+        
 
 
         # Angle the deflector is facing
@@ -29,11 +33,26 @@ class Player:
     # Update the player
     def update(self, input_state):
         if self.alive:
-            #Get the current velocity based on input
-            self.vel = Vec2(input_state.move_right * self.move_speed - input_state.move_left * self.move_speed,
-                            input_state.move_down * self.move_speed - input_state.move_up * self.move_speed)
-            #Change the position
-            self.pos += self.vel
+
+            #Use F=ma to get the acceleration
+            if input_state.move_up:
+                self.accel.y -= self.force_applied/self.mass * input_state.move_up
+
+            if input_state.move_down:
+                self.accel.y += self.force_applied/self.mass * input_state.move_down
+
+            if input_state.move_left:
+                self.accel.x -= self.force_applied/self.mass * input_state.move_left
+
+            if input_state.move_right:
+                self.accel.x += self.force_applied/self.mass * input_state.move_right
+
+
+            # s = ut + 1/2 at^2
+            self.pos += self.vel * constants.DT +  self.accel * 0.5 * constants.DT**2
+            # v = u+at
+            self.vel = (self.vel + self.accel * constants.DT) * (1-self.friction)
+            self.accel = self.accel *  (1-self.friction)
 
             #Calculate the angle the deflector is facing by finding the vector between the mouse and the player and getting the angle of it
             self.deflector_angle = -(Vec2.from_tuple(input_state.mouse_pos) - self.pos).angle()
