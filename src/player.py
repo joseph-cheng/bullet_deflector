@@ -36,20 +36,20 @@ class Player:
         if not(self.alive):
             return
           #Use F=ma to get the acceleration
-          if input_state.move_up:
-              self.accel.y -= self.force_applied/self.mass * input_state.move_up
+        if input_state.move_up:
+            self.accel.y -= self.force_applied/self.mass * input_state.move_up
 
-          if input_state.move_down:
-              self.accel.y += self.force_applied/self.mass * input_state.move_down
+        if input_state.move_down:
+            self.accel.y += self.force_applied/self.mass * input_state.move_down
 
-          if input_state.move_left:
-              self.accel.x -= self.force_applied/self.mass * input_state.move_left
+        if input_state.move_left:
+            self.accel.x -= self.force_applied/self.mass * input_state.move_left
 
-          if input_state.move_right:
-              self.accel.x += self.force_applied/self.mass * input_state.move_right
+        if input_state.move_right:
+            self.accel.x += self.force_applied/self.mass * input_state.move_right
 
 
-        # s = ut + 1/2 at^2
+            # s = ut + 1/2 at^2
         self.pos += self.vel * constants.DT +  self.accel * 0.5 * constants.DT**2
         # v = u+at
         self.vel = (self.vel + self.accel * constants.DT) * (1-self.friction)
