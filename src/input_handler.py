@@ -8,11 +8,14 @@ class InputState:
         self.key_code_down = pygame.K_s
         self.key_code_left = pygame.K_a
         self.key_code_right = pygame.K_d
+        self.key_code_slomo = pygame.K_SPACE
+
         self.move_up = 0.0
         self.move_down = 0.0
         self.move_left = 0.0
         self.move_right = 0.0
         self.mouse_pos = (0,0)
+        self.slomo = False
 
 #Handles all the input events
 class InputHandler:
@@ -35,6 +38,8 @@ class InputHandler:
                     self.input_state.move_right = 1
                 if event.key == self.input_state.key_code_left:
                     self.input_state.move_left = 1
+                if event.key == self.input_state.key_code_slomo:
+                    self.input_state.slomo = True
 
             if event.type == pygame.KEYUP:
                 if event.key == self.input_state.key_code_up:
@@ -45,6 +50,9 @@ class InputHandler:
                     self.input_state.move_right = 0
                 if event.key == self.input_state.key_code_left:
                     self.input_state.move_left = 0
+                if event.key == self.input_state.key_code_slomo:
+                    self.input_state.slomo = False
+
             if event.type == pygame.MOUSEMOTION:
                 self.input_state.mouse_pos = pygame.mouse.get_pos()
 
