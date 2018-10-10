@@ -10,8 +10,8 @@ class Player:
         self.vel = Vec2(0, 0)
         self.accel = Vec2(0,0)
         self.mass = 0.02
-        self.force_applied = 10
-        self.friction = 0.25
+        self.force_applied = 2
+        self.friction = 0.15
         
 
 
