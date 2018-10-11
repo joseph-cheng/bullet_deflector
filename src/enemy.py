@@ -12,7 +12,7 @@ class Enemy:
         self.radius = 10
 
         #Amount of ticks between shooting
-        self.max_shoot_timer = 100
+        self.max_shoot_timer = 20
         self.shoot_timer = self.max_shoot_timer
 
         self.alive = True
@@ -34,7 +34,7 @@ class Enemy:
 
     def shoot_at_player(self, state_obj):
         angle = (state_obj.player.pos - self.pos).angle()
-        state_obj.unreflected_bullets.append(bullet.Bullet(self.pos.copy(), Vec2(math.cos(angle), math.sin(angle))))
+        state_obj.unreflected_bullets.append(bullet.Bullet(self.pos.copy(), Vec2(60*math.cos(angle), 60*math.sin(angle))))
 
 
     def render(self, screen):        

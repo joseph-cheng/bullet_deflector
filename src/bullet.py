@@ -1,6 +1,7 @@
 import pygame
 import math
 from vec2 import Vec2
+import constants
 
 # Bullet object that enemies will shoot, just travels linearly
 class Bullet:
@@ -18,7 +19,7 @@ class Bullet:
         self.alive = True
 
     def update(self, state_obj):
-        self.pos += self.vel
+        self.pos += self.vel * constants.DT
         if self.pos.x + self.radius < 0 or self.pos.x - self.radius > state_obj.width or self.pos.y + self.radius < 0 or self.pos.y - self.radius > state_obj.height:    
             self.alive = False
             
@@ -64,7 +65,7 @@ class Bullet:
             x = normalised_wall_vector * (self.vel.dp(normalised_wall_vector))
             y = self.vel-x
 
-            self.vel = y - x
+            self.vel = y - x + state_obj.player.vel
             self.reflected = True
             state_obj.unreflected_bullets.remove(self)
             state_obj.reflected_bullets.append(self)
@@ -81,7 +82,7 @@ class Bullet:
         #If the bullet has been deflected and is colliding with the player set the bullet and player to not alive
         if (player.pos-self.pos).magnitude2() <= (player.radius + self.radius)**2:
             self.alive = False
-            player.alive = False
+            #player.alive = False
 
 
     def render(self, screen):
