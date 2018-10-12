@@ -16,6 +16,7 @@ class InputState:
         self.move_right = 0.0
         self.mouse_pos = (0,0)
         self.slomo = False
+        self.slomo_prev = False
 
 #Handles all the input events
 class InputHandler:
@@ -57,5 +58,6 @@ class InputHandler:
                 self.input_state.mouse_pos = pygame.mouse.get_pos()
 
     def get_current_input_state(self):
+        self.input_state.slomo_prev = self.input_state.slomo
         self.input_callback()
         return self.input_state

@@ -28,6 +28,9 @@ class Vec2:
     def __truediv__(self, scale):
         return Vec2(self.x/scale, self.y/scale)
 
+    def multiply_vec(self, other):
+        return Vec2(self.x * other.x, self.y * other.y)
+
     # Dot product
     def dp(self, other):
         return self.x * other.x + self.y * other.y

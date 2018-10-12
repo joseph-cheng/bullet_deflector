@@ -85,6 +85,7 @@ class Bullet:
             #player.alive = False
 
 
-    def render(self, screen):
-        pygame.draw.circle(screen, self.reflected_colour if self.reflected else self.colour, self.pos.to_int().to_tuple(), self.radius)
+    def render(self, screen, camera):
+        pygame.draw.circle(screen, self.reflected_colour if self.reflected else self.colour, 
+                camera.world_to_screen(self.pos).to_int().to_tuple(), int(self.radius * camera.zoom))
 
