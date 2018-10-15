@@ -10,17 +10,17 @@ class Renderer:
     def render(self, state_obj):
         self.screen.fill((255,255,255))
 
-        state_obj.player.render(self.screen)
+        state_obj.player.render(self.screen, state_obj.camera)
 
 ##      Runs the render function for each enemy currently alive
         for enemy in state_obj.enemies:
-            enemy.render(self.screen)
+            enemy.render(self.screen, state_obj.camera)
         
         for bullet in state_obj.reflected_bullets:
-            bullet.render(self.screen)
+            bullet.render(self.screen, state_obj.camera)
 
         for bullet in state_obj.unreflected_bullets:
-            bullet.render(self.screen)
+            bullet.render(self.screen, state_obj.camera)
 
         pygame.display.update()
 

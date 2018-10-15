@@ -63,9 +63,9 @@ class Player:
             
 
 
-    def render(self, screen):
+    def render(self, screen, camera):
         # Draw the main player
-        pygame.draw.circle(screen, (0,0,0), self.pos.to_int().to_tuple(), self.radius)
+        pygame.draw.circle(screen, (0,0,0), camera.world_to_screen(self.pos).to_int().to_tuple(), int(self.radius * camera.zoom))
 
 
         # Find the middle of the deflector
@@ -82,7 +82,8 @@ class Player:
         self.deflector_end = deflector_mid_point + vec_to_end
 
         # Draw the deflector
-        pygame.draw.line(screen, (0,0,0), self.deflector_start.to_int().to_tuple(), self.deflector_end.to_int().to_tuple())
+        pygame.draw.line(screen, (0,0,0), camera.world_to_screen(self.deflector_start).to_int().to_tuple(),
+                                          camera.world_to_screen(self.deflector_end).to_int().to_tuple())
 
 
 

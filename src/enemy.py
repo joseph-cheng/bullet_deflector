@@ -37,8 +37,8 @@ class Enemy:
         state_obj.unreflected_bullets.append(bullet.Bullet(self.pos.copy(), Vec2(60*math.cos(angle), 60*math.sin(angle))))
 
 
-    def render(self, screen):        
+    def render(self, screen, camera):        
 ##      Draws the enemy
-        pygame.draw.circle(screen, (self.colour), self.pos.to_int().to_tuple(), self.radius)
+        pygame.draw.circle(screen, (self.colour), camera.world_to_screen(self.pos).to_int().to_tuple(), int(self.radius * camera.zoom))
         
         
